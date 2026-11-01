@@ -75,4 +75,6 @@ Install the session look from https://github.com/g4lb/my-claude-settings.
 
 ### Settings
 
-To change the badge size, edit `BADGE_WIDTH` in `session-look.py`. A larger number makes the text smaller. To change the colors, edit `PALETTE` in `session-look.py`.
+To change the badge size, open iTerm2 and go to **Settings > Profiles > Default > General**. Next to **Badge**, click **Edit...**. Set **Max Height** to `0.05` and **Max Width** to `0.2`. A smaller number makes the text smaller. Scripts cannot change this setting. Only Claude Code tabs show a badge, so this change does not affect other tabs.
+
+To change the colors, edit `PALETTE` in `session-look.py`.

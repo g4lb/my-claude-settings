@@ -17,7 +17,8 @@ import subprocess
 import sys
 
 STATE_DIR = os.path.expanduser("~/.claude/session-look")
-BADGE_WIDTH = 30  # characters; bigger = smaller badge font
+# Badge size is set in the iTerm2 profile: Settings > Profiles > General >
+# Badge > Edit... > Max Height / Max Width. Scripts cannot change it.
 
 # (name, tab color, background tint for a dark theme)
 PALETTE = [
@@ -111,10 +112,7 @@ def apply(data):
 
     os.makedirs(STATE_DIR, exist_ok=True)
     project = os.path.basename(cwd.rstrip("/")) or cwd
-    # One short line: the folder name. iTerm scales the badge font so the text
-    # fills a fixed box; leading no-break spaces widen the text, so the visible
-    # name renders smaller. Raise BADGE_WIDTH for a smaller font.
-    badge = "\u00a0" * max(0, BADGE_WIDTH - len(project)) + project
+    badge = project  # one short line: the folder name
 
     st = load(state_path(tty))
     if st and st.get("session_id") == session_id:
