@@ -51,7 +51,6 @@ When you run many Claude Code sessions, it is easy to confuse them. The session 
 | --- | --- |
 | Tab color | Each open session gets a different color. Two open sessions do not get the same color (up to 8 sessions). |
 | Background | A dark tint of the same color |
-| Badge | The folder name, in small text at the top right of the window |
 
 The status line script starts `session-look.py` each time that it updates. The script sends iTerm2 escape sequences only when something changes. When the session ends, a `SessionEnd` hook resets the tab color, the background, and the badge.
 
@@ -74,7 +73,5 @@ Install the session look from https://github.com/g4lb/my-claude-settings.
 ```
 
 ### Settings
-
-To change the badge size, open iTerm2 and go to **Settings > Profiles > Default > General**. Next to **Badge**, click **Edit...**. Set **Max Height** to `0.05` and **Max Width** to `0.2`. A smaller number makes the text smaller. Scripts cannot change this setting. Only Claude Code tabs show a badge, so this change does not affect other tabs.
 
 To change the colors, edit `PALETTE` in `session-look.py`.

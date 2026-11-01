@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Give each Claude Code session a distinct look in iTerm2.
+"""Give each Claude Code session a distinct tab color and background tint in iTerm2.
 
-  session-look.py apply   (stdin: status-line JSON)  -> tab color, bg tint, badge
+  session-look.py apply   (stdin: status-line JSON)  -> tab color, bg tint
   session-look.py reset   (stdin: hook JSON)         -> restore defaults
 
 Hook/status-line processes have no controlling terminal, so the escape
@@ -10,15 +10,12 @@ Each live session picks a palette color that no other live session uses.
 Never fails loudly: any error exits 0 silently.
 """
 
-import base64
 import json
 import os
 import subprocess
 import sys
 
 STATE_DIR = os.path.expanduser("~/.claude/session-look")
-# Badge size is set in the iTerm2 profile: Settings > Profiles > General >
-# Badge > Edit... > Max Height / Max Width. Scripts cannot change it.
 
 # (name, tab color, background tint for a dark theme)
 PALETTE = [
@@ -112,7 +109,7 @@ def apply(data):
 
     os.makedirs(STATE_DIR, exist_ok=True)
     project = os.path.basename(cwd.rstrip("/")) or cwd
-    badge = project  # one short line: the folder name
+    badge = project  # not shown; kept so a folder change still re-applies
 
     st = load(state_path(tty))
     if st and st.get("session_id") == session_id:
@@ -127,8 +124,7 @@ def apply(data):
         osc(f"6;1;bg;red;brightness;{tr}") +
         osc(f"6;1;bg;green;brightness;{tg}") +
         osc(f"6;1;bg;blue;brightness;{tb}") +
-        osc(f"11;rgb:{br:02x}/{bg:02x}/{bb:02x}") +
-        osc("1337;SetBadgeFormat=" + base64.b64encode(badge.encode()).decode())
+        osc(f"11;rgb:{br:02x}/{bg:02x}/{bb:02x}")
     )
     with open(tty, "w") as f:
         f.write(seq)
