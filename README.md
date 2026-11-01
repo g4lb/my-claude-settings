@@ -52,7 +52,7 @@ When you run many Claude Code sessions, it is easy to confuse them. The session 
 | Tab color | Each open session gets a different color. Two open sessions do not get the same color (up to 8 sessions). |
 | Background | A dark tint of the same color |
 
-The status line script starts `session-look.py` each time that it updates. The script sends iTerm2 escape sequences only when something changes. When the session ends, a `SessionEnd` hook resets the tab color, the background, and the badge.
+The status line script starts `session-look.py` each time that it updates. The script sends iTerm2 escape sequences only when something changes. When the session ends, a `SessionEnd` hook resets the tab color and the background.
 
 This works only in iTerm2. In other terminals, the escape sequences can have no effect.
 
