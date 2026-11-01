@@ -5,6 +5,12 @@
 
 input=$(cat)
 
+# Per-session tab color / background tint / badge in iTerm2 (no-op when unchanged).
+# Optional: runs only if session-look.py is installed.
+if [ -f "$HOME/.claude/session-look.py" ]; then
+  printf '%s' "$input" | python3 "$HOME/.claude/session-look.py" apply >/dev/null 2>&1 &
+fi
+
 model=$(echo "$input" | jq -r '.model.display_name // empty')
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // empty')
 

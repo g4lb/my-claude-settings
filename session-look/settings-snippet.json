@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/session-look.py\" reset",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

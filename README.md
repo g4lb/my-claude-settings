@@ -42,3 +42,37 @@ Then start Claude Code again.
 ### Colors
 
 The email is bright blue. The other items are dim. To change a color, edit the color lines in the script, for example `BLUE="\033[94m"`.
+
+## Session look (iTerm2)
+
+When you run many Claude Code sessions, it is easy to confuse them. The session look gives each session a different look in iTerm2:
+
+| Item | Content |
+| --- | --- |
+| Tab color | Each open session gets a different color. Two open sessions do not get the same color (up to 8 sessions). |
+| Background | A dark tint of the same color |
+| Badge | The folder name, in small text at the top right of the window |
+
+The status line script starts `session-look.py` each time that it updates. The script sends iTerm2 escape sequences only when something changes. When the session ends, a `SessionEnd` hook resets the tab color, the background, and the badge.
+
+This works only in iTerm2. In other terminals, the escape sequences can have no effect.
+
+### Install
+
+Install the status line first. Then copy this prompt into Claude Code:
+
+```
+Install the session look from https://github.com/g4lb/my-claude-settings.
+
+1. Download session-look/session-look.py from the main branch.
+2. Save it as ~/.claude/session-look.py.
+3. Make sure that ~/.claude/statusline-command.sh has the session-look block
+   from statusline/statusline-command.sh. If it does not, add the block.
+4. Read ~/.claude/settings.json. Add the SessionEnd hook from
+   session-look/settings-snippet.json. Keep all other settings and hooks.
+5. Show me the changes.
+```
+
+### Settings
+
+To change the badge size, edit `BADGE_WIDTH` in `session-look.py`. A larger number makes the text smaller. To change the colors, edit `PALETTE` in `session-look.py`.
